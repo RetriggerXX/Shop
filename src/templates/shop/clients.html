@@ -1,1 +1,70 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Список пользователей</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            text-align: center;
+            padding: 0px;
+            background-color: #f4f4f4;
+        }
+        .users-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            padding: 20px;
+        }
+        .user-item {
+            background: #ffffff;
+            padding: 20px;
+            width: 250px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        .user-item:hover {
+            transform: scale(1.05);
+        }
+        .user-photo {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+        }
+        .user-name {
+            font-size: 1.25rem;
+            font-weight: bold;
+        }
+        .user-info {
+            font-size: 1rem;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <h1>Список пользователей</h1>
+    <div class="users-list">
+        {% for user in users %}
+            <div class="user-item">
+                <img src="{% static 'shop/img/users/'|add:user.name|add:'.jpg' %}" alt="{{ user.name }}" class="user-photo">
+                <div class="user-name">{{ user.name }}</div>
+                <div class="user-info">
+                    <p>Возраст: {{ user.age }}</p>
+                    <p>Телефон: {{ user.phone }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
+{% endblock %}
