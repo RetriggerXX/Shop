@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Детские товары</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0px;
+            text-align: center;
+        }
+        .goods-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+        }
+        .good-item {
+            background: #8f9d9e;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+        }
+        .good-item:hover {
+            background: #8f9d9e;
+        }
+        .good-item h2 {
+            font-size: 1.5rem;
+        }
+        .good-item p {
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <h1>Детские товары</h1>
+    <div class="goods-list">
+        {% for good in goods %}
+            <a href="#" class="good-item">
+                <h2>{{ good.good_name }}</h2>
+                <p>Статус: {{ good.status }}</p>
+            </a>
+        {% endfor %}
+    </div>
+</body>
+</html>
+{% endblock %}
