@@ -46,7 +46,9 @@ INSTALLED_APPS = [
     'shop',
     #helping apps
     'django_extensions',
-    'authentication'
+    'authentication',
+    'crispy_forms',
+    "crispy_bootstrap5",
 ]
 
 MIDDLEWARE = [
@@ -143,4 +145,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 #authentication
 AUTH_USER_MODEL = 'authentication.CustomUser'
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+
+CRISPY_TEMPLATE_PACK = "bootstrap5"
 

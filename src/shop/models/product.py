@@ -37,8 +37,12 @@ class Product(models.Model):
     )
 
     def clean(self):
-        if self.price < 0 or self.price == None:
-            raise ValidationError
+        # Проверяем, что цена не отрицательная и не None
+        if self.price is None or self.price < 1:
+            raise ValidationError("Цена не может быть отрицательной или отсутствовать.")
+
+        if self.is_available == True and self.count_items < 1:
+            raise ValidationError("Товар не может быть одновременно доступен и его количество быть меньше 0")
 
     def __str__(self):
         return  f"{self.name} count: {self.count_items}"
