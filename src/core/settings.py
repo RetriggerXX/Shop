@@ -43,8 +43,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     #my_apps
+    'shop_api',
     'shop',
     #helping apps
+    'rest_framework',
     'django_extensions',
     'authentication',
     'crispy_forms',
