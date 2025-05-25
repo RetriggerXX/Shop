@@ -1,63 +1,53 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 {% block content %}
 
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Категории покупок</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0px;
-            text-align: center;
-        }
-        .categories {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            flex-wrap: wrap;
-        }
-        .category {
-            background: #8f9d9e;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
-            width: 300px;
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            transition: background 0.3s;
-        }
-        .category:hover {
-            background: #8f9d9e;
-        }
-    </style>
-</head>
-<body>
-    <h1>Категории покупок</h1>
-    <div class="categories">
-        <a href="/shop/marketplace/children" class="category">
-            <h2>Детская</h2>
-            <p>Игрушки, одежда, книги для детей</p>
-        </a>
-        <a href="/shop/marketplace/electronics" class="category">
-            <h2>Электроника</h2>
-            <p>Смартфоны, ноутбуки, аксессуары</p>
-        </a>
-        <a href="/shop/marketplace/clothing" class="category">
-            <h2>Одежда</h2>
-            <p>Мужская, женская, детская одежда</p>
-        </a>
-        <a href="/shop/marketplace/appliances" class="category">
-            <h2>Бытовая техника</h2>
-            <p>Стиральные машины, холодильники, пылесосы</p>
-        </a>
-    </div>
-</body>
-</html>
+<h1>Form page product</h1>
+
+{% if error %}
+    <p style="color: red;">{{ error }}</p>
+{% endif %}
+
+<style>
+
+  form {
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    gap: 10px 10px;
+    align-items: center;
+    max-width: 500px;
+    margin-top: 20px;
+  }
+
+  label {
+    text-align: right;
+    padding-right: 10px;
+  }
+
+  input, select, textarea {
+    width: 100%;
+    padding: 5px;
+    font-size: 1em;
+  }
+
+  textarea {
+    resize: vertical;
+  }
+
+  input[type="submit"] {
+    grid-column: 2;
+    width: auto;
+    padding: 5px 10px;
+  }
+
+
+</style>
+
+<form action="/shop/add_product" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_table }}
+
+    <p><input type="submit" value="OK"></p>
+</form>
+
 {% endblock %}

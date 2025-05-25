@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Детали товара</title>
+</head>
+<body>
+    <h1>Информация о товаре</h1>
+
+    <ul>
+        <li><strong>Название:</strong> {{ object.name }}</li>
+        <li><strong>Цена:</strong> {{ object.price }} руб.</li>
+        <li><strong>В наличии:</strong> {{ object.is_available|yesno:"Да,Нет" }}</li>
+        <li><strong>Категория:</strong> {{ object.category }}</li>
+    </ul>
+
+    <a href="/products">Назад к списку товаров</a>
+</body>
+</html>
