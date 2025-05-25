@@ -1,6 +1,7 @@
 from rest_framework import serializers
 
 from shop.models.product import ProductCategory, Product
+from shop.models.order import Order
 
 
 class ShopSerializer(serializers.Serializer):
@@ -23,10 +24,15 @@ class ShopSerializer(serializers.Serializer):
         return Product.objects.create(**validated_data)
 
     def update(self, instance, validated_data):
-        instance.name = validated_data('name', instance.name)
-        instance.price = validated_data('price', instance.price)
-        instance.is_available = validated_data('is_available', instance.is_available)
-        instance.category = validated_data('category', instance.category)
+        instance.name = validated_data.get('name', instance.name)
+        instance.price = validated_data.get('price', instance.price)
+        instance.is_available = validated_data.get('is_available', instance.is_available)
+        instance.category = validated_data.get('category', instance.category)
         instance.save()
 
         return instance
+
+class OrderSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Order
+        fields = ['name', 'description']
