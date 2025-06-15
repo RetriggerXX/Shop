@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Список продуктов</title>
+</head>
+<body>
+    <h1>Список продуктов</h1>
+
+    <!-- Проверка на наличие продуктов в списке -->
+    {% if product_list %}
+        <ul>
+            {% for product in product_list %}
+                <li>
+                    <a href="{% url 'product_detail' pk=product.pk %}">{{ product.name }}</a> -
+                    {{ product.price }}₽
+                </li>
+            {% endfor %}
+        </ul>
+
+        <!-- Пагинация -->
+        <div class="pagination">
+            <span class="step-links">
+                {% if product_list.has_previous %}
+                    <a href="?page=1">&laquo; Первая</a>
+                    <a href="?page={{ product_list.previous_page_number }}">Предыдущая</a>
+                {% endif %}
+
+                <span class="current">
+                    Страница {{ product_list.number }} из {{ product_list.paginator.num_pages }}.
+                </span>
+
+                {% if product_list.has_next %}
+                    <a href="?page={{ product_list.next_page_number }}">Следующая</a>
+                    <a href="?page={{ product_list.paginator.num_pages }}">Последняя &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
+    {% else %}
+        <p>Продукты не найдены.</p>
+    {% endif %}
+</body>
+</html>
