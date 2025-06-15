@@ -39,15 +39,12 @@ def children(request):
     return render(request, template_name = 'children.html', context = {'goods': children_goods})
 
 def Product_Form(request):
-
     context = {}
-
-
     if request.method == "POST":
         form = ModelProductForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect("/shop/add_product")
     context["form"] = ModelProductForm()
-
     return render(request, template_name='shop.html', context=context)
+
