@@ -1,5 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
+
+from .admin.product import product
+from .forms import ModelProductForm
 goods = [
     {"good_name": "Плюшевый мишка", "status": "в наличии", "category": "детские"},
     {"good_name": "Конструктор Lego", "status": "нет в наличии", "category": "детские"},
@@ -34,4 +37,14 @@ def clients(request):
 def children(request):
     children_goods = [good for good in goods if good["category"] == "детские"]
     return render(request, template_name = 'children.html', context = {'goods': children_goods})
+
+def Product_Form(request):
+    context = {}
+    if request.method == "POST":
+        form = ModelProductForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("/shop/add_product")
+    context["form"] = ModelProductForm()
+    return render(request, template_name='shop.html', context=context)
 
