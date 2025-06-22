@@ -51,6 +51,8 @@ INSTALLED_APPS = [
     'authentication',
     'crispy_forms',
     "crispy_bootstrap5",
+    'django_celery_results',
+    'django_celery_beat',
 ]
 
 MIDDLEWARE = [
@@ -155,3 +157,9 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 
+CELERY_TIMEZONE = "Europe/Prague"
+CELERY_RESULT_BACKEND = 'redis://localhost:6379'
+CELERY_BROKEN_URL = 'redis://localhost:6379'
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_TASK_TRACK_STARTED = True
+CELERY_TASK_TIME_LIMIT = 30 * 60
